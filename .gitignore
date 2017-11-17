@@ -7,4 +7,12 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 
+# IntelliJ
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/dictionaries
+.idea/libraries
+
 
