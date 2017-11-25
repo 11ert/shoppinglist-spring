@@ -18,10 +18,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.codecentric</groupId>
-  <artifactId>springboot-sample-app</artifactId>
+  <groupId>de.thorsten</groupId>
+  <artifactId>shopping-app</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Spring Boot Sample App</name>
+  <name>Shopping App Server</name>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
