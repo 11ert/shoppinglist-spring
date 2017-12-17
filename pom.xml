@@ -92,9 +92,9 @@
   </properties>
 
   <scm>
-    <url>https://github.com/codecentric/springboot-sample-app</url>
-    <connection>scm:git:git://github.com/codecentric/springboot-sample-app.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/codecentric/springboot-sample-app.git</developerConnection>
+    <url>https://github.com/11ert/shoppinglist</url>
+    <connection>scm:git:git://github.com/11ert/shoppinglist.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/11ert/shoppinglist.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -128,7 +128,7 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.7.5.201505241946</version>
+            <version>0.7.9</version>
             <configuration>
               <excludes>
                 <exclude>**/Application.class</exclude>
@@ -159,7 +159,7 @@
           <plugin>
             <groupId>org.eluder.coveralls</groupId>
             <artifactId>coveralls-maven-plugin</artifactId>
-            <version>4.1.0</version>
+            <version>4.3.0</version>
           </plugin>
         </plugins>
       </build>
