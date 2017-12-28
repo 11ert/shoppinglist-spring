@@ -80,10 +80,16 @@
       <version>1.1.0.Final</version>
     </dependency>
 
+    <!--<dependency>-->
+      <!--<groupId>org.postgresql</groupId>-->
+      <!--<artifactId>postgresql</artifactId>-->
+      <!--<version>9.4-1203-jdbc42</version>-->
+    <!--</dependency>-->
+
+    <!-- Use MySQL Connector-J -->
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>9.4-1203-jdbc42</version>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
     </dependency>
   </dependencies>
 
