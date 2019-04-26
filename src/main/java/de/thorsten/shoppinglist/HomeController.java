@@ -42,6 +42,7 @@ public class HomeController {
         List<Record> records = repository.findAll();
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
+        System.out.println("DB Repotefsdf:" + repository.toString());
         return "home";
     }
 
