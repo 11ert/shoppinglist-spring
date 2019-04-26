@@ -16,7 +16,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{project.name}">Sample App</title>
+    <title th:text="#{project.name}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
@@ -27,9 +27,16 @@
 <body>
 <div class="container">
     <div class="page-header">
-        <h1 th:text="#{project.name}">Sample App</h1>
-        <p class="lead">Demo Applikation um zu zeigen wie <a href="http://projects.spring.io/spring-boot/">Spring Boot</a> auf <a href="https://openshift.com">OpenShift</a> läuft.</p>
-        <p>Open Source<a href="https://github.com/codecentric/springboot-sample-app">GitHub</a>. You're currently looking at version <span th:text="#{project.version}">0.0.1</span>.</p>
+<!--        <img th:src="@{/images/spring-boot.png}"/> -->
+        <h1 th:text="#{project.name}"/>
+        <table>
+            <tr>
+                <td><p class="lead">Demo Applikation mit   </p></td>
+                <td><img th:src="@{//s3.eu-central-1.amazonaws.com/shoppinglist-bucket-11ert/img/spring-boot.png}" width="100px"/></td>
+            </tr>
+        </table>
+
+        <p>Open Source<a href="https://github.com/11ert/shoppinglist">GitHub</a>. You're currently looking at version <span th:text="#{project.version}">0.0.1</span>.</p>
     </div>
 
     <div class="row">
@@ -37,7 +44,7 @@
             <form th:object="${insertRecord}" method="POST">
                 <div class="form-group">
                     <label for="data">Record to insert</label>
-                    <input id="data" type="text" class="form-control" placeholder="Lorem ipsum" th:field="*{data}" />
+                    <input id="data" type="text" class="form-control" placeholder="Text hier eingeben.." th:field="*{data}" />
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
