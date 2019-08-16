@@ -16,6 +16,7 @@
 package de.thorsten.shoppinglist;
 
 import javax.validation.Valid;
+import java.awt.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,10 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(ModelMap model) {
+        System.out.println("/home/ page called ");
         List<Record> records = repository.findAll();
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
-        System.out.println("DB Repotefsdf:" + repository.toString());
         return "home";
     }
 
@@ -55,4 +56,8 @@ public class HomeController {
         }
         return home(model);
     }
+
+
+
+
 }

@@ -1,0 +1,1 @@
+java -jar -Dspring.profiles.active=obelix .\target\app.jar
