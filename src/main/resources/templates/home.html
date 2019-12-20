@@ -1,19 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-  Copyright 2016 codecentric AG
 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="#{project.name}"/>
@@ -23,6 +9,28 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <style>
+        .ui-autocomplete-loading {
+            background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+        }
+    </style>
+
+    <!-- autocomplete -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+		$(function() {
+			$("#Suggestion_Field").autocomplete({
+				source: "suggestionsAutocomplete",
+				minLength: 3
+
+			});
+		});
+	</script>
+
 </head>
 <body>
 <div class="container">
@@ -42,9 +50,11 @@
     <div class="row">
         <div class="col-md-12 col-lg-6">
             <form th:object="${insertRecord}" method="POST">
-                <div class="form-group">#and
-                    <label for="data">Record to insert</label>
-                    <input id="data" type="text" class="form-control" placeholder="Text hier eingeben.." th:field="*{data}" />
+                <div class="form-group">
+                    <label for="Suggestion_Field">Record to insert</label>
+ <!--                   <input id="data" type="text" class="form-control" placeholder="Text hier eingeben.." th:field="*{data}" /> -->
+                        <input id="Suggestion_Field" type="text" class="form-control" placeholder="Text hier eingeben.." th:field="*{data}">
+<!--                    <input id="Plant_Name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="description" th:text="${plantName}"-->
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
@@ -68,7 +78,11 @@
             </table>
         </div>
     </div>
-</div>
+
+  </div>
+
+  <!-- autocomplete -->
+
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

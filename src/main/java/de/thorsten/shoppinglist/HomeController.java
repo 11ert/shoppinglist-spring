@@ -17,18 +17,18 @@ package de.thorsten.shoppinglist;
 
 import javax.validation.Valid;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
 public class HomeController {
 
     private RecordRepository repository;
@@ -38,16 +38,18 @@ public class HomeController {
         this.repository = repository;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/", method = RequestMethod.GET)
     public String home(ModelMap model) {
-        System.out.println("/home/ page called ");
+        System.out.println("/ called ");
         List<Record> records = repository.findAll();
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
+        List<String> suggestions = new ArrayList<String>();
+        model.addAttribute("suggestions", suggestions);
         return "home";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST)
     public String insertData(ModelMap model, 
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
@@ -57,7 +59,16 @@ public class HomeController {
         return home(model);
     }
 
-
+    @RequestMapping(value ="/suggestionsAutocomplete", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> suggestionsAutocomplete() {
+        List<String> suggestions = new ArrayList<String>();
+        suggestions.add("Hallo Hallo");
+        suggestions.add("Hallo Eins");
+        suggestions.add("HalloEins");
+        suggestions.add("Zwei Hallo");
+        return suggestions;
+    }
 
 
 }
