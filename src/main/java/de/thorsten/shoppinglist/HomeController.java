@@ -16,22 +16,25 @@
 package de.thorsten.shoppinglist;
 
 import javax.validation.Valid;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
 
     private RecordRepository repository;
+
+    @Autowired
+    private FoodRepository foodRepository;
+
+    private List<Food> allFood;
+    private List<Food> suggestedFood;
 
     @Autowired
     public HomeController(RecordRepository repository) {
@@ -45,7 +48,6 @@ public class HomeController {
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
         List<String> suggestions = new ArrayList<String>();
-        model.addAttribute("suggestions", suggestions);
         return "home";
     }
 
@@ -61,12 +63,15 @@ public class HomeController {
 
     @RequestMapping(value ="/suggestionsAutocomplete", method = RequestMethod.GET)
     @ResponseBody
-    public List<String> suggestionsAutocomplete() {
+    public List<String> suggestionsAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term) {
         List<String> suggestions = new ArrayList<String>();
-        suggestions.add("Hallo Hallo");
-        suggestions.add("Hallo Eins");
-        suggestions.add("HalloEins");
-        suggestions.add("Zwei Hallo");
+        allFood = foodRepository.findAll();
+        suggestedFood = foodRepository.findByNameIsContaining(term);
+        System.out.println("Size Food" + suggestedFood.size());
+
+        for (Food food : suggestedFood) {
+            suggestions.add(food.getName());
+        }
         return suggestions;
     }
 
