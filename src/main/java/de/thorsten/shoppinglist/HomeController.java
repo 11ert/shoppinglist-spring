@@ -32,9 +32,11 @@ public class HomeController {
 
     @Autowired
     private FoodRepository foodRepository;
+    @Autowired
+    private SuggestionRepository suggestionRepository;
 
     private List<Food> allFood;
-    private List<Food> suggestedFood;
+    private List<Suggestion> suggestedFood;
 
     @Autowired
     public HomeController(RecordRepository repository) {
@@ -66,11 +68,14 @@ public class HomeController {
     public List<String> suggestionsAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term) {
         List<String> suggestions = new ArrayList<String>();
         allFood = foodRepository.findAll();
-        suggestedFood = foodRepository.findByNameIsContaining(term);
-        System.out.println("Size Food" + suggestedFood.size());
+        System.out.println("***Size allFood = " + allFood.size());
 
-        for (Food food : suggestedFood) {
-            suggestions.add(food.getName());
+
+        suggestedFood = suggestionRepository.findByNameIsContaining(term);
+        System.out.println("***Size suggestedFood = " + suggestedFood.size());
+
+        for (Suggestion suggestion : suggestedFood) {
+            suggestions.add(suggestion.getName());
         }
         return suggestions;
     }
