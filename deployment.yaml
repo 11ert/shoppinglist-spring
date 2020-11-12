@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoppinglist
+  labels:
+    app: shoppinglist
+spec:
+  selector:
+    matchLabels:
+      app: shoppinglist
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: shoppinglist
+    spec:
+      containers:
+        - name: shoppinglist
+          image: eu.gcr.io/elfert-test/shoppinglist:latest
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 5
+          ports:
+            - containerPort: 8080
+          env:
+            - name: message
+              valueFrom:
+                configMapKeyRef:
+                  name: message-config
+                  key: message
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: message-config
+data:
+  message: Hello World from GKE!
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoppinglist
+spec:
+  selector:
+    app: shoppinglist
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer
